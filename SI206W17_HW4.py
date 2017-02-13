@@ -56,19 +56,9 @@ for i in soup.find_all("h2"):
 
 nytimes_headlines = nytimes_headlines[0:10]
 
-for i in nytimes_headlines:
-	print (i.encode('utf-8'))
+
 
 f.close()
-
-
-
-
-
-
-
-
-
 
 #####################
 
@@ -91,8 +81,20 @@ response = requests.get("https://www.si.umich.edu/directory?field_person_firstna
 htmldoc = response.text
 
 soup = BeautifulSoup(htmldoc,"html.parser")
+
 people = soup.find_all("div",{"class":"views-row"})
+
 umsi_titles = {}
+for person in people:
+	name_person = person.find('div', attrs={"class": "field-item even", "property":"dc:title"})
+	title = person.find('div', attrs={'class': "field field-name-field-person-titles field-type-text field-label-hidden"})
+	umsi_titles[name_person.find('h2').string] = title.string
+
+
+		
+
+
+
 
 ## It may be helpful to translate the following from English to code:
 

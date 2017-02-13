@@ -13,6 +13,7 @@ import codecs
 ## PART 1 (100 points) - Get the HTML data from http://www.nytimes.com (the New York Times home page) and save it in a file called nytimes_data.html.
 
 ## Write the Python code to do so here.
+
 html = requests.get("http://www.nytimes.com")
 html_text = html.text 
 fileref = open("nytimes_data.html", 'w', encoding = "utf-8")
@@ -44,6 +45,13 @@ fileref.close()
 ## Write your code to complete this task here.
 ## HINT: Remember that you'll need to open the file you created in Part 1, read the contets into one big string, and make a BeautifulSoup object out of that string!
 ## NOTE that the provided link does not include saving the online data in a file as part of the process. But it still provides very useful hints/tricks about how to look for and identify the headlines on the NY Times page.
+f = open("nytimes_data.html", 'rb')
+
+soup = BeautifulSoup(f, 'html.parser')
+print(soup.find_all('h2', class_ = "story-heading"))
+
+
+
 
 
 
